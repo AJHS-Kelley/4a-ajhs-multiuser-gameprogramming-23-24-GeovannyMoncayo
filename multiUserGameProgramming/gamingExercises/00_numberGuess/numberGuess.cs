@@ -1,4 +1,4 @@
-// Geovanny Moncayo, Number Guess, v0.2
+// Geovanny Moncayo, Number Guess, v0.3
 /*
 Generate secret number from a defined range of numbers. (i.e. 0-10, 0-50, 0-100)
 Print game instructions including range and num. of guesses allowed.
@@ -70,7 +70,17 @@ namespace numberGuess
             Console.WriteLine("Maximum: " + rangeMax);
             Console.WriteLine("Num. Guesses: " + numGuesses);
 
-
+            // START THE MATCH!
+            while (playerScore != 3 && cpuScore != 3) {
+                // Any code you want to run BEFORE each round goes here.
+                Console.WriteLine("Choose a number from " + rangeMin + " to " + rangeMax);
+                // START EACH ROUND
+                for (int i = 0; if i < numGuesses; i++) {
+                    // Code to guess number goes here.
+                    int numGuessed = Console.ReadLine();
+                    
+                }
+            }
 
         }
     }
