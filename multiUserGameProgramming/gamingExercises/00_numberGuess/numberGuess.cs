@@ -1,4 +1,4 @@
-// Geovanny Moncayo, Number Guess, v0.3
+// Geovanny Moncayo, Number Guess, v0.4
 /*
 Generate secret number from a defined range of numbers. (i.e. 0-10, 0-50, 0-100)
 Print game instructions including range and num. of guesses allowed.
@@ -32,6 +32,7 @@ namespace numberGuess
         static void Main(string[] args)
         {
             int secretNumber = -1;
+            int playerGuess = -1;
             int numGuesses = 0; // Number of guesses player is ALLOWED.
             int numAttempts = 0; // Number of guesses TAKEN.
             int playerScore = 0;
@@ -48,7 +49,7 @@ namespace numberGuess
             difficulty = Console.ReadLine();
             // Console.ReadLine() will save to STRING by default.
 
-            Console.WriteLine("You have selected " + difficulty );
+            
             if (difficulty == "Easy") {
                 rangeMin = 0;
                 rangeMax = 10;
@@ -65,7 +66,9 @@ namespace numberGuess
                 rangeMin = 0;
                 rangeMax = 25;
                 numGuesses = 4;
+                difficulty = "Normal";
             }
+            Console.WriteLine("You have selected " + difficulty );
             Console.WriteLine("Minimum: " + rangeMin);
             Console.WriteLine("Maximum: " + rangeMax);
             Console.WriteLine("Num. Guesses: " + numGuesses);
@@ -73,13 +76,48 @@ namespace numberGuess
             // START THE MATCH!
             while (playerScore != 3 && cpuScore != 3) {
                 // Any code you want to run BEFORE each round goes here.
+                // GENERATE SECRET NUMBER
+                Random rndNum = new Random();
+                secretNumber = rndNum.Next(rangeMin, rangeMax);
+                Console.WriteLine(secretNumber); // REMOVE AFTER YOU TEST THE CODEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
                 Console.WriteLine("Choose a number from " + rangeMin + " to " + rangeMax);
+                Console.WriteLine("Player Score: " + playerScore + "\n");
+                Console.WriteLine("CPU Score " + cpuScore + "\n");
                 // START EACH ROUND
-                for (int i = 0; if i < numGuesses; i++) {
+                for (int i = 0; i < numGuesses; i++) {
                     // Code to guess number goes here.
-                    int numGuessed = Console.ReadLine();
                     
+                    Console.WriteLine("You have used " + numAttempts + " this round.\n");
+                    Console.WriteLine("You must guess between " + rangeMin + " and " + rangeMax);
+                    playerGuess = System.Convert.ToInt32(Console.ReadLine());
+                    if (playerGuess == secretNumber) {
+                        Console.WriteLine("You are absolutely right!");
+                        playerScore++;
+                        break;
+                    } else if (secretNumber == -1) {
+                        Console.WriteLine("Error in code.");
+                    } else {
+                        if (playerGuess > secretNumber) {
+                            Console.WriteLine("You are wronggggg! Try guessing a lower.");
+
+                        } else if (playerGuess < secretNumber) {
+                            Console.WriteLine("You are wronggggg! Try guessing a higher.");
+
+                        }
+                    }
+                    numAttempts++;
                 }
+                if (playerGuess != secretNumber) {
+                    cpuScore ++;
+                    // Print a round lost message to console.
+                    Console.WriteLine("You have lost this round");
+                }
+                numAttempts = 0;
+            }
+            if (playerScore >= 3) {
+                Console.WriteLine("You have won the game!\n");
+            } else {
+                Console.WriteLine("You have lost the game!\n");
             }
 
         }
