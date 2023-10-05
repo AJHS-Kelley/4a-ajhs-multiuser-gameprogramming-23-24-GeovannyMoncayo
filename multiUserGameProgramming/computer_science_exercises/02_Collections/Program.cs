@@ -1,4 +1,4 @@
-﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.3a
+﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.3b
 using System;
 
 namespace _02_Collections
@@ -72,7 +72,6 @@ namespace _02_Collections
             breakfastFoods[0] = "Fried Squid";
             testScores[0] = 59;
             GPA[0] = 1.34f;
-
             Console.WriteLine("The elements for each array are:\n");
             Console.WriteLine("breakfastFoods: \n" + String.Join(", ", breakfastFoods));
             Console.WriteLine();
@@ -80,6 +79,11 @@ namespace _02_Collections
             Console.WriteLine();
             Console.WriteLine("GPA: \n" + String.Join(", ", GPA));
             Console.WriteLine();
+            
+            // PWYOC -- Update Fifth Element from Each Array
+            breakfastFoods[4] = "Steak";
+            testScores[4] = 1;
+            GPA[4] = -0.77f;
             
         }
     }
