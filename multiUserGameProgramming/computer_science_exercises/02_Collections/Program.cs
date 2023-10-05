@@ -1,4 +1,4 @@
-﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.3b
+﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.4a
 using System;
 
 namespace _02_Collections
@@ -85,6 +85,12 @@ namespace _02_Collections
             testScores[4] = 1;
             GPA[4] = -0.77f;
             
+            // Common Bugs working with arrays.
+            // Index Out of Bounds -- Accessing an element that does not exist
+            // Console.WriteLine(breakfastFoods[4]);
+
+            // Incorrect Data Type
+            // testScores[0] = "Billy"; // If possible, use the correct Convert.() If not possible, manually change to correct data type.
         }
     }
 }
