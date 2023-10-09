@@ -1,4 +1,4 @@
-﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.4a
+﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.5a
 using System;
 
 namespace _02_Collections
@@ -68,7 +68,7 @@ namespace _02_Collections
             Console.WriteLine("GPA: " + GPA[2]);
             */
 
-            // Changing Array Elements -- 
+            /* Changing Array Elements -- 
             breakfastFoods[0] = "Fried Squid";
             testScores[0] = 59;
             GPA[0] = 1.34f;
@@ -91,6 +91,26 @@ namespace _02_Collections
 
             // Incorrect Data Type
             // testScores[0] = "Billy"; // If possible, use the correct Convert.() If not possible, manually change to correct data type.
+            */
+            // Common Affray Methods - Sort() -- Sorts in alphabetical or numeric order, ascending.
+            int[] newIntArr = {25, -25, 0, -10, 15, 50, -35, 75, -155, 95, -65, 85};
+            string[] newStringArr = {"Zebra", "Aardvark", "Emu", "Cow", "Frog", "Platypus", "Gorilla", "Ibis", "Horse"};
+            Console.WriteLine("The elements for each array are:\n");
+            Console.WriteLine("newIntArr: \n" + String.Join(", ", newIntArr));
+            Console.WriteLine();
+            Console.WriteLine("newStringArr: \n" + String.Join(", ", newStringArr));
+            Console.WriteLine();
+            // Sort() Each Array
+            Array.Sort(newIntArr);
+            Array.Sort(newStringArr);
+            Console.WriteLine("The SORTED elements for each array are:\n");
+            Console.WriteLine("newIntArr: \n" + String.Join(", ", newIntArr));
+            Console.WriteLine();
+            Console.WriteLine("newStringArr: \n" + String.Join(", ", newStringArr));
+            Console.WriteLine();
+
+
+
         }
     }
 }
