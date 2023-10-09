@@ -1,6 +1,7 @@
 ﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.5b
 using System;
 using System.Linq;
+using System.Collections;
 
 namespace _02_Collections
 {
@@ -17,7 +18,7 @@ namespace _02_Collections
             -- Arrays are orered, meaning each item has a fixed position.
             -- The position is known as the INDEX.
             -- First element in an array is index 0.
-            */
+            
             
             // Declaring and Defining an Array
             string[] breakfastFoods = { "Bacon", "Waffles", "Pancakes", "Cereal", "Parfait"};
@@ -32,7 +33,7 @@ namespace _02_Collections
             Console.WriteLine();
             Console.WriteLine("GPA: \n" + String.Join(", ", GPA));
             Console.WriteLine();
-
+            */
             /* Print Array Contents -- Each Element on Seperate Line
             Console.WriteLine("The elements for each array are:\n");
             Console.WriteLine("breakfastFoods: \n" + String.Join("\n", breakfastFoods));
@@ -93,11 +94,12 @@ namespace _02_Collections
             // Incorrect Data Type
             // testScores[0] = "Billy"; // If possible, use the correct Convert.() If not possible, manually change to correct data type.
             */
+            /*
             // Common Affray Methods - Sort() -- Sorts in alphabetical or numeric order, ascending.
             int[] newIntArr = {25, -25, 0, -10, 15, 50, -35, 75, -155, 95, -65, 85};
             string[] newStringArr = {"Zebra", "Aardvark", "Emu", "Cow", "Frog", "Platypus", "Gorilla", "Ibis", "Horse"};
             Console.WriteLine("The elements for each array are:\n");
-            /*
+            
             Console.WriteLine("newIntArr: \n" + String.Join(", ", newIntArr));
             Console.WriteLine();
             Console.WriteLine("newStringArr: \n" + String.Join(", ", newStringArr));
@@ -110,7 +112,7 @@ namespace _02_Collections
             Console.WriteLine();
             Console.WriteLine("newStringArr: \n" + String.Join(", ", newStringArr));
             Console.WriteLine();
-            */
+            
             // Common Array Methods - Min(), Max(), and Sum()
             Console.WriteLine("The minimum value for newIntArr is:");
             Console.WriteLine(newIntArr.Min());
@@ -118,8 +120,30 @@ namespace _02_Collections
             Console.WriteLine(newIntArr.Max());
             Console.WriteLine("The sum value for newIntArr is:");
             Console.WriteLine(newIntArr.Sum());
+            */
 
+            // Create ArrayList -- Array that can have items added/deleted AND changed
+            var myArrayList = new ArrayList();
+            // Add items to ArrayList - .Add()
+            myArrayList.Add(5);
+            myArrayList.Add("First Name");
+            myArrayList.Add(true);
+            myArrayList.Add(0.0f);
 
+            Console.WriteLine(myArrayList[0]);
+            Console.WriteLine(myArrayList[1]);
+            Console.WriteLine(myArrayList[2]);
+            Console.WriteLine(myArrayList[3]);
+
+            // Create ArrayList
+            var myArrayList2 = new ArrayList() 
+                {
+                    -10, "Last Name", false, 0.25f
+                };
+            Console.WriteLine(myArrayList2[0]);
+            Console.WriteLine(myArrayList2[1]);
+            Console.WriteLine(myArrayList2[2]);
+            Console.WriteLine(myArrayList2[3]);
         }
     }
 }
