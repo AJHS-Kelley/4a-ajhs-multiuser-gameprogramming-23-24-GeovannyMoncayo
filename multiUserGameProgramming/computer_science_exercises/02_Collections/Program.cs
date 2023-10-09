@@ -1,5 +1,6 @@
-﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.5a
+﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.5b
 using System;
+using System.Linq;
 
 namespace _02_Collections
 {
@@ -96,6 +97,7 @@ namespace _02_Collections
             int[] newIntArr = {25, -25, 0, -10, 15, 50, -35, 75, -155, 95, -65, 85};
             string[] newStringArr = {"Zebra", "Aardvark", "Emu", "Cow", "Frog", "Platypus", "Gorilla", "Ibis", "Horse"};
             Console.WriteLine("The elements for each array are:\n");
+            /*
             Console.WriteLine("newIntArr: \n" + String.Join(", ", newIntArr));
             Console.WriteLine();
             Console.WriteLine("newStringArr: \n" + String.Join(", ", newStringArr));
@@ -108,7 +110,14 @@ namespace _02_Collections
             Console.WriteLine();
             Console.WriteLine("newStringArr: \n" + String.Join(", ", newStringArr));
             Console.WriteLine();
-
+            */
+            // Common Array Methods - Min(), Max(), and Sum()
+            Console.WriteLine("The minimum value for newIntArr is:");
+            Console.WriteLine(newIntArr.Min());
+            Console.WriteLine("The maximum value for newIntArr is:");
+            Console.WriteLine(newIntArr.Max());
+            Console.WriteLine("The sum value for newIntArr is:");
+            Console.WriteLine(newIntArr.Sum());
 
 
         }
