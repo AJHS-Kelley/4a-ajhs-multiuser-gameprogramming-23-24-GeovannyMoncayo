@@ -1,4 +1,4 @@
-﻿// 02_Collections, Geovanny Moncayo, 10-3-23, v0.5b
+﻿// 02_Collections, Geovanny Moncayo, v0.7a -- Final Version
 using System;
 using System.Linq;
 using System.Collections;
@@ -122,7 +122,7 @@ namespace _02_Collections
             Console.WriteLine(newIntArr.Sum());
             */
 
-            // Create ArrayList -- Array that can have items added/deleted AND changed
+            /* Create ArrayList -- Array that can have items added/deleted AND changed
             var myArrayList = new ArrayList();
             // Add items to ArrayList - .Add()
             myArrayList.Add(5);
@@ -134,16 +134,53 @@ namespace _02_Collections
             Console.WriteLine(myArrayList[1]);
             Console.WriteLine(myArrayList[2]);
             Console.WriteLine(myArrayList[3]);
-
-            // Create ArrayList
+            */
+            // Create ArrayList With Values
             var myArrayList2 = new ArrayList() 
                 {
-                    -10, "Last Name", false, 0.25f
+                    -10, "Last Name", false, 0.25f, -10, 1.25f, "Potato", 152, -125
                 };
             Console.WriteLine(myArrayList2[0]);
             Console.WriteLine(myArrayList2[1]);
             Console.WriteLine(myArrayList2[2]);
             Console.WriteLine(myArrayList2[3]);
+
+            // ArrayList Methods -- .Insert(index, value)
+            myArrayList2.Insert(1, "First Name");
+            Console.WriteLine(myArrayList2[1]);
+            Console.WriteLine(myArrayList2[2]);
+
+            /* Removing Items from ArrayList -- .Remove() Deletes FIRST OCCURENCE of the item.
+            myArrayList2.Remove(-10);
+            Console.WriteLine(myArrayList2[0]);
+
+            // .RemoveAt(value) -- Deletes at the specified index value.
+            Console.WriteLine(".RemoveAt() Example");
+            Console.WriteLine(myArrayList2[3]);
+            myArrayList2.RemoveAt(3);
+            Console.WriteLine(myArrayList2[3]);
+            */
+            // .RemoveRange(value0, value1) -- Deletes items in the specified index range.
+            /*
+            Console.WriteLine(".RemoveRange() Example -- BEFORE");
+            Console.WriteLine(myArrayList2[2]);
+            Console.WriteLine(myArrayList2[3]);
+            Console.WriteLine(myArrayList2[4]);
+            myArrayList2.RemoveRange(2, 4); // Removes index 2, 3, and 4.
+            Console.WriteLine(".RemoveRange() Example -- AFTER");
+            Console.WriteLine(myArrayList2[2]);
+            Console.WriteLine(myArrayList2[3]);
+            Console.WriteLine(myArrayList2[4]);
+            */
+
+            // .Contains() if Item Exists in ArrayList Returns true or false based on contents.
+            Console.WriteLine("BEGIN .Contains() EXAMPLE");
+            Console.WriteLine("Does the myArrayList 2 Contain false?");
+            Console.WriteLine(myArrayList2.Contains(false)); // Should print true
+            Console.WriteLine("Does the myArrayList 2 Contain 500?");
+            Console.WriteLine(myArrayList2.Contains(500));  // Should print false
+
+            Console.WriteLine("END .Contains() EXAMPLE");
         }
     }
 }
