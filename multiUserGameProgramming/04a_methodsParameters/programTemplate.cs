@@ -1,4 +1,4 @@
-// Geovanny Moncayo, Methods and Parameters, v0.2
+// Geovanny Moncayo, Methods and Parameters, v0.3
 
 using System;
 
@@ -26,10 +26,20 @@ namespace MethodsParameters
             //Console.WriteLine(sum);
             return sum *= 2;
         }
+        
+        // Methods with Parameters
+        static void MakePancake(int num)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                Console.WriteLine("One golden, fluffy pancake coming up!\n");
+            }
+        }
         static void Main(string[] args)
         {
             //MyMethod();
-            DoubleUp();
+            //DoubleUp();
+            MakePancake(10);
         }
     }
 }
