@@ -1,4 +1,4 @@
-// Geovanny Moncayo, Methods and Parameters, v0.4
+// Geovanny Moncayo, Methods and Parameters, v0.5
 
 using System;
 
@@ -40,12 +40,19 @@ namespace MethodsParameters
         {
             Console.WriteLine("You have ordered " + num + " eggs cooked " + style + ".\n");
         }
+
+        static void MakeBurger(int num = 1)
+        {
+            Console.WriteLine("I am going to cook " + num + " hamburgers.\n");
+        }
         static void Main(string[] args)
         {
             //MyMethod();
             //DoubleUp();
             //MakePancake(10);
-            MakeEggs(10, "sunny side up");
+            //MakeEggs(10, "sunny side up");
+            MakeBurger();
+            MakeBurger(10);
         }
     }
 }
