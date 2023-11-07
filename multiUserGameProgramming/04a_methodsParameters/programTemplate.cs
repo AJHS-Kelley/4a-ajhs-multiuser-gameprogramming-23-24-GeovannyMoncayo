@@ -1,5 +1,4 @@
-// Geovanny Moncayo, Methods and Parameters, v0.6
-
+// Geovanny Moncayo, Methods and Parameters, v0.7
 using System;
 
 namespace MethodsParameters
@@ -52,6 +51,24 @@ namespace MethodsParameters
         {
             Console.WriteLine("My favorite child is " + child3);
         }
+        
+        // METHOD OVERLOADING
+        // Find Sum of Int
+        static int FindSum(int x, int y)
+        {
+            int sum = x + y;
+            Console.WriteLine("Sum: " + sum);
+            return sum;
+        }
+
+        // Find Sum of Double
+        static double FindSum(double x, double y)
+        {
+            double sum = x + y;
+            Console.WriteLine("Sum: " + sum);
+            return sum;
+        }
+
         static void Main(string[] args)
         {
             //MyMethod();
@@ -60,7 +77,10 @@ namespace MethodsParameters
             //MakeEggs(10, "sunny side up");
             //MakeBurger();
             //MakeBurger(10);
-            AllMyChildren(child3: "Steve", child2: "Susan", child1: "Chewbacca");
+            //AllMyChildren(child3: "Steve", child2: "Susan", child1: "Chewbacca");
+            FindSum(1.2000000222222222222222, 1.8000000222222222222222);
+            FindSum(2, 3);
+            FindSum(1.2000000222222222222222, 4);
         }
     }
 }
