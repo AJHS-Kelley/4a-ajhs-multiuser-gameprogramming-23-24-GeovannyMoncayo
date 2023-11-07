@@ -1,4 +1,4 @@
-// Geovanny Moncayo, Methods and Parameters, v0.5
+// Geovanny Moncayo, Methods and Parameters, v0.6
 
 using System;
 
@@ -40,10 +40,17 @@ namespace MethodsParameters
         {
             Console.WriteLine("You have ordered " + num + " eggs cooked " + style + ".\n");
         }
-
+        
+        // Using Defaults for Parameters
         static void MakeBurger(int num = 1)
         {
             Console.WriteLine("I am going to cook " + num + " hamburgers.\n");
+        }
+
+        // Named Arguments
+        static void AllMyChildren(string child1, string child2, string child3)
+        {
+            Console.WriteLine("My favorite child is " + child3);
         }
         static void Main(string[] args)
         {
@@ -51,8 +58,9 @@ namespace MethodsParameters
             //DoubleUp();
             //MakePancake(10);
             //MakeEggs(10, "sunny side up");
-            MakeBurger();
-            MakeBurger(10);
+            //MakeBurger();
+            //MakeBurger(10);
+            AllMyChildren(child3: "Steve", child2: "Susan", child1: "Chewbacca");
         }
     }
 }
