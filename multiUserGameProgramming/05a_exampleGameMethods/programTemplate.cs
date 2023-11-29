@@ -8,10 +8,11 @@ namespace Operators
     class Program
 
     {   
-        static void checkInventory (ArrayList Inventory)
+        static void checkInventory (ArrayList inventory)
         {
             var checkList = new ArrayList();
             //cycles through all items in Inventory
+            /*
             for (int i = 0; i < Inventory.Count; i++)
             {
                 //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
@@ -44,10 +45,35 @@ namespace Operators
                     checkList.Add(amount);
                 }
             }
-            //Console.WriteLine("You have:" + string.Join(":\n", checkList));
-            foreach(var item in checkList)
+            */
+            for(int x = 0; x < inventory.Count-1; x++)
             {
-                Console.WriteLine(item);
+                Console.WriteLine("Hello");
+                for(int y = 0; y < checkList.Count-1; y++)
+                {
+                    if(inventory[x] != checkList[y])
+                    {
+                        checkList.Add(inventory[x]);
+                        checkList.Add(1);
+                    }
+                    else
+                    {
+                        for(int i = 0; i < inventory.Count-1; i++)
+                        {
+                            if (inventory[x] == inventory[i])
+                            {
+                                Console.WriteLine(inventory[i]);
+                                //Inventory[i+1] = Convert.ToInt32.Inventory[i+1] + 1;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            //Console.WriteLine("You have:" + string.Join(":\n", checkList));
+            for(int z = 0; z < checkList.Count-1; z++)
+            {
+                Console.WriteLine(checkList[z]);
             }
         }
 
