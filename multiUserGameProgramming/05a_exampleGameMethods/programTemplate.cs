@@ -8,7 +8,151 @@ namespace Operators
     class Program
 
     {   
-        static void checkInventory (ArrayList Inventory)
+        static bool canCraft (object item = "none")
+        {
+            if (item = "none")
+            {
+                Console.WriteLine("Please input an item to craft")
+                return false;
+            }
+            else if (item = "sandwich")
+            {
+                int breadCount = 0;
+                int hamCount = 0;
+                foreach (object thing in Inventory)
+                {
+                    if (System.ToString(thing) == "bread")
+                    {
+                        breadCount = breadCount + 1;
+                    }
+                }
+                foreach (object thing in Inventory)
+                {
+                    if (System.ToString(thing) == "ham")
+                    {
+                        hamCount = hamCount + 1;
+                    }
+                }
+                if (breadCount >= 2 && hamCount >= 1)
+                {
+                    return true;
+                }
+                else if (breadCount > 2 && hamCount > 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Error Code: sandwich canCraft count");
+                    return false;
+                }
+            }
+            else if (item = "sticks")
+            {
+                int woodCount = 0;
+                foreach (object thing in Inventory)
+                {
+                    if (System.ToString(thing) == "bread")
+                    {
+                        woodCount = woodCount + 1;
+                    }
+                }
+                if (woodCount >= 1)
+                {
+                    return true;
+                }
+                else if (woodCount < 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Error Code: stick canCraft count");
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error Code: canCraft");
+            }
+            
+
+        }
+        static bool pickUp(object item = "none")
+        {
+            if (item = "none")
+            {
+                Console.WriteLine("Please input an item to pickUp");
+                return false;
+            }
+            var checkList = checkInventory(Inventory);
+            for(int i = 0; int <= checkList; i++)
+            {
+                
+                int itemCount = System.ToInt32(checkList[i+1]);
+                
+                if (item == checkList[i])
+                {
+                    if (itemCount == 10)
+                    {
+                        return false;
+                    }
+                    else if (itemCount > 10)
+                    {
+                        for(int x = 0; x <= itemCount-10; x++)
+                        {
+                            Inventory.Remove(item);
+                            Console.WriteLine("Items removed");
+                        }
+                        return false;
+                    }
+                    else if (itemCount < 10)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error Code: for pickUp");
+                    }
+                }
+            }
+            Console.WriteLine("Error Code: pickUp");
+            return false;
+        }
+        static void craft(object item = "none")
+        {
+            string itemString = System.ToString(item)
+            if (item = "none")
+            {
+                Console.WriteLine("Please input an item to craft");
+                return false;
+            }
+            if (canCraft(item) == true)
+            {
+                if (itemString == "sandwich")
+                {
+                    Inventory.Remove("bread");
+                    Inventory.Remove("bread");
+                    Inventory.Remove("ham");
+                    Inventory.Add("sandwich");
+                }
+                else if (item string == "sticks")
+                {
+                    Inventory.Remove("wood");
+                    Inventory.Add("sticks");
+                }
+                else
+                {
+                    Console.WriteLine("Error Code: craft");
+                }
+                Console.WriteLine(itemString + " added to your inventory");
+            }
+            else if (canCraft(item) == false)
+            {
+                Console.WriteLine("You can't craft this");
+            }
+        }
+        static ArrayList checkInventory (ArrayList Inventory)
         {
             var checkList = new ArrayList();
             //cycles through all items in Inventory
@@ -99,6 +243,7 @@ namespace Operators
             {
                 Console.WriteLine(checkList[z]);
             }
+            return checkList;
         }
 
 
