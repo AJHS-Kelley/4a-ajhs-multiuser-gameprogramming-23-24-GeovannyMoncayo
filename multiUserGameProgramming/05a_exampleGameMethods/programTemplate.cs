@@ -8,18 +8,14 @@ namespace Operators
     class Program
 
     {   
-        static bool canCraft (object item = "none")
+        static bool canCraft (object item)
         {
-            if (item = "none")
-            {
-                Console.WriteLine("Please input an item to craft")
-                return false;
-            }
-            else if (item = "sandwich")
+            var itemString = item.ToString();
+            if (itemString == "sandwich")
             {
                 int breadCount = 0;
                 int hamCount = 0;
-                foreach (object thing in Inventory)
+                foreach (object thing in myInventory)
                 {
                     if (System.ToString(thing) == "bread")
                     {
@@ -47,7 +43,7 @@ namespace Operators
                     return false;
                 }
             }
-            else if (item = "sticks")
+            else if (itemString = "sticks")
             {
                 int woodCount = 0;
                 foreach (object thing in Inventory)
@@ -78,15 +74,11 @@ namespace Operators
             
 
         }
-        static bool pickUp(object item = "none")
+        static bool pickUp(object item)
         {
-            if (item = "none")
-            {
-                Console.WriteLine("Please input an item to pickUp");
-                return false;
-            }
+            
             var checkList = checkInventory(Inventory);
-            for(int i = 0; int <= checkList; i++)
+            for(int i = 0; i <= checkList; i++)
             {
                 
                 int itemCount = System.ToInt32(checkList[i+1]);
@@ -119,14 +111,9 @@ namespace Operators
             Console.WriteLine("Error Code: pickUp");
             return false;
         }
-        static void craft(object item = "none")
+        static void craft(object item)
         {
-            string itemString = System.ToString(item)
-            if (item = "none")
-            {
-                Console.WriteLine("Please input an item to craft");
-                return false;
-            }
+            string itemString = System.ToString(item);
             if (canCraft(item) == true)
             {
                 if (itemString == "sandwich")
@@ -136,7 +123,7 @@ namespace Operators
                     Inventory.Remove("ham");
                     Inventory.Add("sandwich");
                 }
-                else if (item string == "sticks")
+                else if (itemString == "sticks")
                 {
                     Inventory.Remove("wood");
                     Inventory.Add("sticks");
