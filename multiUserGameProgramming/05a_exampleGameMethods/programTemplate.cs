@@ -264,5 +264,3 @@ var checkList = new ArrayList()
     "Wood", 1, "Stone", 3, "Burger", 4
 }
 */
-
-// Code Review by Xavier Oliver
