@@ -8,23 +8,23 @@ namespace Operators
     class Program
 
     {   
-        static bool canCraft (object item)
+        static bool canCraft (object item, ArrayList Inventory)
         {
-            var itemString = item.ToString();
+            var itemString = System.Convert.ToString(item);
             if (itemString == "sandwich")
             {
                 int breadCount = 0;
                 int hamCount = 0;
-                foreach (object thing in myInventory)
+                foreach (object thing in Inventory)
                 {
-                    if (System.ToString(thing) == "bread")
+                    if (System.Convert.ToString(thing) == "bread")
                     {
                         breadCount = breadCount + 1;
                     }
                 }
                 foreach (object thing in Inventory)
                 {
-                    if (System.ToString(thing) == "ham")
+                    if (System.Convert.ToString(thing) == "ham")
                     {
                         hamCount = hamCount + 1;
                     }
@@ -43,12 +43,12 @@ namespace Operators
                     return false;
                 }
             }
-            else if (itemString = "sticks")
+            else if (itemString == "sticks")
             {
                 int woodCount = 0;
                 foreach (object thing in Inventory)
                 {
-                    if (System.ToString(thing) == "bread")
+                    if (System.Convert.ToString(thing) == "bread")
                     {
                         woodCount = woodCount + 1;
                     }
@@ -70,18 +70,19 @@ namespace Operators
             else
             {
                 Console.WriteLine("Error Code: canCraft");
+                return false;
             }
             
 
         }
-        static bool pickUp(object item)
+        static bool pickUp(object item, ArrayList Inventory)
         {
             
             var checkList = checkInventory(Inventory);
-            for(int i = 0; i <= checkList; i++)
+            for(int i = 0; i <= checkList.Count; i++)
             {
                 
-                int itemCount = System.ToInt32(checkList[i+1]);
+                int itemCount = System.Convert.ToInt32(checkList[i+1]);
                 
                 if (item == checkList[i])
                 {
@@ -111,10 +112,10 @@ namespace Operators
             Console.WriteLine("Error Code: pickUp");
             return false;
         }
-        static void craft(object item)
+        static void craft(object item, ArrayList Inventory)
         {
-            string itemString = System.ToString(item);
-            if (canCraft(item) == true)
+            string itemString = System.Convert.ToString(item);
+            if (canCraft(item, Inventory) == true)
             {
                 if (itemString == "sandwich")
                 {
@@ -134,16 +135,16 @@ namespace Operators
                 }
                 Console.WriteLine(itemString + " added to your inventory");
             }
-            else if (canCraft(item) == false)
+            else if (canCraft(item, Inventory) == false)
             {
                 Console.WriteLine("You can't craft this");
             }
         }
-        static ArrayList checkInventory (ArrayList Inventory)
+        static ArrayList checkInventory (ArrayList InventoryList)
         {
             var checkList = new ArrayList();
             //cycles through all items in Inventory
-            
+            var Inventory = InventoryList;
             for (int i = 0; i < Inventory.Count; i++)
             {
                 //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
@@ -152,7 +153,7 @@ namespace Operators
                     // Adds "Stone" to checkList
                     checkList.Add(Inventory[i]);
                     // sets "Stone to object conItem
-                    object conItem = Inventory[i];
+                    string conItem = System.Convert.ToString(Inventory[i]);
                     Inventory.Remove(conItem);
                     var amount = 1;
                     //foreach(var item in checkList)
@@ -226,7 +227,7 @@ namespace Operators
             }
             */
             //Console.WriteLine("You have:" + string.Join(":\n", checkList));
-            for(int z = 0; z < checkList.Count-1; z++)
+            for(int z = 0; z < checkList.Count; z++)
             {
                 Console.WriteLine(checkList[z]);
             }
@@ -245,6 +246,11 @@ namespace Operators
                 "Wood", "Wood", "Stone", "Stone", "x", "x", "x", "x"
             };
             checkInventory(myInventory);
+            
+            // for (int i = 0; i < myInventory.Count; i++)
+            // {
+            //     Console.WriteLine("Item " + i);
+            // }
             
         }
         
