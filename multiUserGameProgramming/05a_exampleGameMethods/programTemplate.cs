@@ -146,76 +146,182 @@ namespace Operators
             //cycles through all items in Inventory
             var Inventory = InventoryList;
             // for (int i = 0; i < Inventory.Count; i++)
-            int i = 0;
-            while (true)
+            
+            for (int i = 0; Inventory.Count != 0; i++)
             {
                 string checkedItem = System.Convert.ToString(Inventory[i]);
-                if (i < Inventory.Count)
+                Console.WriteLine("index: " + i);
+                    //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
+                if (checkList.Contains(checkedItem) == false)
                 {
-                //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
-                    if (checkList.Contains(checkedItem) == false)
+                    
+                    string conItem = checkedItem;
+                    
+                    var amount = 0;
+                    
+                    checkList.Add(conItem);
+                    
+                    for (int x = 0; Inventory.Contains(conItem); x++)
                     {
-                        // Adds "Stone" to checkList
-                        // checkList.Add(checkedItem);
-                        // sets "Stone to object conItem
-                        string conItem = checkedItem;
-                        // Inventory.Remove(conItem);
-                        // Console.WriteLine(conItem + " Removed");
-                        var amount = 1;
-                        //foreach(var item in checkList)
-                        //{
-                        //    Console.WriteLine("first " + item);
-                        //}
-                        
-                        //for (int x = 0; x < Inventory.Count-1; x++)
-                        int x = 0;
-                        while (true)
+                        if(Inventory.Contains(conItem) == true)
                         {
-                            
-                            if (x >= Inventory.Count-1)
-                            {
-                                break;
-                            }
-                            else if (x < Inventory.Count-1)
-                            {
-                                if(Inventory.Contains(conItem) == true)
-                                {
-                                    amount++;
-                                    Inventory.Remove(conItem);
-                                    Console.WriteLine(conItem + " Removed");
-                                    
-                                    
-                                    //Console.WriteLine("second " + conItem);
-                                    //Console.WriteLine("second " + amount);
-                                    
-                                }
-                                // else if (Inventory.Contains(conItem) == false)
-                                // {
-                                //     Console.WriteLine("rep");
-                                //     continue;
-                                    
-                                // }
-                            }
-                            x++;
-                            
+                            amount++;
+                            Inventory.Remove(conItem);
+                            Console.WriteLine(conItem + " Removed");
                         }
-                        checkList.Add(amount);
-                        Console.WriteLine(amount);
+                        
                     }
+                    
+                    checkList.Add(amount);
+                    Console.WriteLine(amount);
                 }
-                else if (i >= Inventory.Count)
-                {
-                    break;
-                }
-                i++;
+                
+                
                 Console.WriteLine("cl beg");
                 foreach (object thingy in Inventory)
                 {
                     Console.WriteLine(thingy);
                 }
                 Console.WriteLine("cl end");
-                
             }
+                
+                
+            
+            
+            
+            
+            
+            // while ENTER WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+            // int i = 0;
+            // while (true)
+            // {
+            //     string checkedItem = System.Convert.ToString(Inventory[i]);
+            //     if (i < Inventory.Count)
+            //     {
+            //         Console.WriteLine("index: " + i);
+            //         //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
+            //         if (checkList.Contains(checkedItem) == false)
+            //         {
+            //             // Adds "Stone" to checkList
+            //             // checkList.Add(checkedItem);
+            //             // sets "Stone to object conItem
+            //             string conItem = checkedItem;
+            //             // Inventory.Remove(conItem);
+            //             // Console.WriteLine(conItem + " Removed");
+            //             var amount = 0;
+            //             //foreach(var item in checkList)
+            //             //{
+            //             //    Console.WriteLine("first " + item);
+            //             //}
+                        
+            //             //for (int x = 0; x < Inventory.Count-1; x++)
+                        
+                        
+            //             //Console.WriteLine("aslkfdjoiewanmfoiesmfoiensmaoifjnmewiofnoainsfe");
+                        
+                        
+            //             for (int x = 0; Inventory.Contains(conItem); x++)
+            //             {
+            //                 if(Inventory.Contains(conItem) == true)
+            //                 {
+            //                     amount++;
+            //                     Inventory.Remove(conItem);
+            //                     Console.WriteLine(conItem + " Removed");
+                                
+                                
+            //                     //Console.WriteLine("second " + conItem);
+            //                     //Console.WriteLine("second " + amount);
+            //                 }
+            //                 // else if (Inventory.Contains(conItem) == false)
+            //                 // {
+            //                 //     Console.WriteLine("rep");
+            //                 //     continue;
+                                
+            //                 // }
+            //             }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            //             // // WHILE LOOP LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            //             // int x = 0;
+            //             // while (true)
+            //             // {
+                            
+            //             //     if (x >= Inventory.Count-1)
+            //             //     {
+            //             //         break;
+            //             //     }
+            //             //     else if (x < Inventory.Count-1)
+            //             //     {
+            //             //         if(Inventory.Contains(conItem) == true)
+            //             //         {
+            //             //             amount++;
+            //             //             Inventory.Remove(conItem);
+            //             //             Console.WriteLine(conItem + " Removed");
+                                    
+                                    
+            //             //             //Console.WriteLine("second " + conItem);
+            //             //             //Console.WriteLine("second " + amount);
+                                    
+            //             //         }
+            //             //         // else if (Inventory.Contains(conItem) == false)
+            //             //         // {
+            //             //         //     Console.WriteLine("rep");
+            //             //         //     continue;
+                                    
+            //             //         // }
+            //             //     }
+            //             //     x++;
+                            
+            //             // }
+            //             checkList.Add(amount);
+            //             Console.WriteLine(amount);
+            //         }
+            //     }
+            //     else if (i >= Inventory.Count)
+            //     {
+            //         break;
+            //     }
+            //     i++;
+            //     Console.WriteLine("cl beg");
+            //     foreach (object thingy in Inventory)
+            //     {
+            //         Console.WriteLine(thingy);
+            //     }
+            //     Console.WriteLine("cl end");
+                
+            // }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             // Goes through each item in the Inventory List
@@ -296,6 +402,9 @@ namespace Operators
         
     }
 }
+
+
+
 
 
 
