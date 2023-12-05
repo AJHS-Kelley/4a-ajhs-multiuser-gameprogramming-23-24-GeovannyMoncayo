@@ -112,6 +112,7 @@ namespace Operators
             Console.WriteLine("Error Code: pickUp");
             return false;
         }
+        
         static void craft(object item, ArrayList Inventory)
         {
             string itemString = System.Convert.ToString(item);
@@ -140,6 +141,7 @@ namespace Operators
                 Console.WriteLine("You can't craft this");
             }
         }
+        
         static ArrayList checkInventory (ArrayList InventoryList)
         {
             var checkList = new ArrayList();
@@ -161,14 +163,14 @@ namespace Operators
                     
                     checkList.Add(conItem);
                     
-                    for (int x = 0; Inventory.Contains(conItem); x++)
+                    for (int j = 0; Inventory.Contains(conItem); j++)
                     {
-                        if(Inventory.Contains(conItem) == true)
-                        {
-                            amount++;
-                            Inventory.Remove(conItem);
-                            Console.WriteLine(conItem + " Removed");
-                        }
+                        Console.WriteLine("j: " + j);
+                        
+                        amount++;
+                        Inventory.Remove(conItem);
+                        Console.WriteLine(conItem + " Removed");
+                    
                         
                     }
                     
@@ -184,196 +186,10 @@ namespace Operators
                 }
                 Console.WriteLine("cl end");
             }
-                
-                
+
             
-            
-            
-            
-            
-            // while ENTER WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-            // int i = 0;
-            // while (true)
-            // {
-            //     string checkedItem = System.Convert.ToString(Inventory[i]);
-            //     if (i < Inventory.Count)
-            //     {
-            //         Console.WriteLine("index: " + i);
-            //         //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
-            //         if (checkList.Contains(checkedItem) == false)
-            //         {
-            //             // Adds "Stone" to checkList
-            //             // checkList.Add(checkedItem);
-            //             // sets "Stone to object conItem
-            //             string conItem = checkedItem;
-            //             // Inventory.Remove(conItem);
-            //             // Console.WriteLine(conItem + " Removed");
-            //             var amount = 0;
-            //             //foreach(var item in checkList)
-            //             //{
-            //             //    Console.WriteLine("first " + item);
-            //             //}
-                        
-            //             //for (int x = 0; x < Inventory.Count-1; x++)
-                        
-                        
-            //             //Console.WriteLine("aslkfdjoiewanmfoiesmfoiensmaoifjnmewiofnoainsfe");
-                        
-                        
-            //             for (int x = 0; Inventory.Contains(conItem); x++)
-            //             {
-            //                 if(Inventory.Contains(conItem) == true)
-            //                 {
-            //                     amount++;
-            //                     Inventory.Remove(conItem);
-            //                     Console.WriteLine(conItem + " Removed");
-                                
-                                
-            //                     //Console.WriteLine("second " + conItem);
-            //                     //Console.WriteLine("second " + amount);
-            //                 }
-            //                 // else if (Inventory.Contains(conItem) == false)
-            //                 // {
-            //                 //     Console.WriteLine("rep");
-            //                 //     continue;
-                                
-            //                 // }
-            //             }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-            //             // // WHILE LOOP LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            //             // int x = 0;
-            //             // while (true)
-            //             // {
-                            
-            //             //     if (x >= Inventory.Count-1)
-            //             //     {
-            //             //         break;
-            //             //     }
-            //             //     else if (x < Inventory.Count-1)
-            //             //     {
-            //             //         if(Inventory.Contains(conItem) == true)
-            //             //         {
-            //             //             amount++;
-            //             //             Inventory.Remove(conItem);
-            //             //             Console.WriteLine(conItem + " Removed");
-                                    
-                                    
-            //             //             //Console.WriteLine("second " + conItem);
-            //             //             //Console.WriteLine("second " + amount);
-                                    
-            //             //         }
-            //             //         // else if (Inventory.Contains(conItem) == false)
-            //             //         // {
-            //             //         //     Console.WriteLine("rep");
-            //             //         //     continue;
-                                    
-            //             //         // }
-            //             //     }
-            //             //     x++;
-                            
-            //             // }
-            //             checkList.Add(amount);
-            //             Console.WriteLine(amount);
-            //         }
-            //     }
-            //     else if (i >= Inventory.Count)
-            //     {
-            //         break;
-            //     }
-            //     i++;
-            //     Console.WriteLine("cl beg");
-            //     foreach (object thingy in Inventory)
-            //     {
-            //         Console.WriteLine(thingy);
-            //     }
-            //     Console.WriteLine("cl end");
-                
-            // }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // Goes through each item in the Inventory List
-            
-            
-            /*
-            foreach (var item in inventory)
-            {
-                // Goes through each item in the Check List
-                var totalItem = checkList.Count(s => s == item);
-                if (totalItem == 0)
-                {
-                    checkList.Add(item);
-                    checkList.Add(inventory.Count(y => y == item));
-                }
-                
-                
-                for(int y = 0; y < checkList.Count; y++)
-                {
-                    Console.WriteLine("Hello");
-                    // Checks if Inventory item is in checkList
-                    
-                    
-                    
-                    if(inventory[x] != checkList[y])
-                    {
-                        // If inventory item is not in checkList, it is added to the list and a default number 1 is added
-                        checkList.Add(inventory[x]);
-                        checkList.Add(1);
-                    }
-                    else
-                    {
-                        // If inventory item is in the checkList
-                        for(int i = 0; i < inventory.Count-1; i++)
-                        {
-                            if (inventory[x] == inventory[i])
-                            {
-                                Console.WriteLine(inventory[i]);
-                                inventory[i+1] = Convert.ToInt32(inventory[i+1]);
-                            }
-                        }
-                    }
-                    
-                    
-                }
-                
-                
-            }
-            */
-            //Console.WriteLine("You have:" + string.Join(":\n", checkList));
-            
-            for(int z = 0; z < checkList.Count; z++)
+            // THIS IS NOT THE PROBLEM. 
+            for (int z = 0; z < checkList.Count; z++)
             {
                 Console.WriteLine(checkList[z]);
             }
@@ -407,15 +223,3 @@ namespace Operators
 
 
 
-
-/*
-var myInventory = new ArrayList()
-{
-    "Burger", "Wood", "Stone", "Burger", "Burger", "Stone", "Burger"
-};
-
-var checkList = new ArrayList()
-{
-    "Wood", 1, "Stone", 2, "Burger", 4
-}
-*/
