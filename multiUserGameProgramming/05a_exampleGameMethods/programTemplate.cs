@@ -8,23 +8,24 @@ namespace Operators
     class Program
 
     {   
-        static bool canCraft (object item, ArrayList Inventory)
+        static bool canCraft (object item, ArrayList InventoryList)
         {
             var itemString = System.Convert.ToString(item);
-            if (itemString == "sandwich")
+            var Inventory = new ArrayList(InventoryList);
+            if (itemString == "Sandwich")
             {
                 int breadCount = 0;
                 int hamCount = 0;
                 foreach (object thing in Inventory)
                 {
-                    if (System.Convert.ToString(thing) == "bread")
+                    if (System.Convert.ToString(thing) == "Bread")
                     {
                         breadCount = breadCount + 1;
                     }
                 }
                 foreach (object thing in Inventory)
                 {
-                    if (System.Convert.ToString(thing) == "ham")
+                    if (System.Convert.ToString(thing) == "Ham")
                     {
                         hamCount = hamCount + 1;
                     }
@@ -33,26 +34,32 @@ namespace Operators
                 {
                     return true;
                 }
-                else if (breadCount > 2 && hamCount > 1)
+                else if (breadCount < 2 && hamCount < 1)
                 {
                     return false;
                 }
                 else
                 {
-                    Console.WriteLine("Error Code: sandwich canCraft count");
+                    Console.WriteLine("Error Code: Sandwich canCraft count");
                     return false;
                 }
             }
-            else if (itemString == "sticks")
+            else if (itemString == "Sticks")
             {
+                // if (canPickUp("Sticks", Inventory) == false)
+                // {
+                //     return false;
+                //     Console.WriteLine("You can't craft sticks, you have too many");
+                // }
                 int woodCount = 0;
-                foreach (object thing in Inventory)
+                for (int i = 0; i < Inventory.Count; i++)
                 {
-                    if (System.Convert.ToString(thing) == "bread")
+                    if (System.Convert.ToString(Inventory[i]) == "Wood")
                     {
                         woodCount = woodCount + 1;
                     }
                 }
+                
                 if (woodCount >= 1)
                 {
                     return true;
@@ -63,7 +70,7 @@ namespace Operators
                 }
                 else
                 {
-                    Console.WriteLine("Error Code: stick canCraft count");
+                    Console.WriteLine("Error Code: Sticks canCraft count");
                     return false;
                 }
             }
@@ -75,31 +82,33 @@ namespace Operators
             
 
         }
-        static bool pickUp(object item, ArrayList Inventory)
+        static bool canPickUp(object pickItem, ArrayList Inventory)
         {
             
-            var checkList = checkInventory(Inventory);
-            for(int i = 0; i <= checkList.Count; i++)
+            var checkList = new ArrayList (checkInventory(Inventory));
+            string item = System.Convert.ToString(pickItem);
+            int maxAmount = 10;
+            
+            for(int i = 0; i <= checkList.Count-1; i++)
             {
-                
-                int itemCount = System.Convert.ToInt32(checkList[i+1]);
                 
                 if (item == checkList[i])
                 {
-                    if (itemCount == 10)
+                    int itemCount = System.Convert.ToInt32(checkList[i+1]);
+                    if (itemCount == maxAmount)
                     {
                         return false;
                     }
-                    else if (itemCount > 10)
+                    else if (itemCount > maxAmount)
                     {
-                        for(int x = 0; x <= itemCount-10; x++)
+                        for(int x = 0; x < itemCount-maxAmount; x++)
                         {
                             Inventory.Remove(item);
                             Console.WriteLine("Items removed");
                         }
                         return false;
                     }
-                    else if (itemCount < 10)
+                    else if (itemCount < maxAmount)
                     {
                         return true;
                     }
@@ -108,37 +117,47 @@ namespace Operators
                         Console.WriteLine("Error Code: for pickUp");
                     }
                 }
+                
             }
             Console.WriteLine("Error Code: pickUp");
             return false;
         }
         
-        static void craft(object item, ArrayList Inventory)
+        static void craft(object item, int amount, ArrayList Inventory)
         {
             string itemString = System.Convert.ToString(item);
-            if (canCraft(item, Inventory) == true)
+            for (int i = 0; i < amount; i++)
             {
-                if (itemString == "sandwich")
+                
+            
+                if (canPickUp(item, Inventory) == false)
                 {
-                    Inventory.Remove("bread");
-                    Inventory.Remove("bread");
-                    Inventory.Remove("ham");
-                    Inventory.Add("sandwich");
+                    Console.WriteLine("You can't craft " + itemString + " because you have too much");
                 }
-                else if (itemString == "sticks")
+                if (canCraft(item, Inventory) == true)
                 {
-                    Inventory.Remove("wood");
-                    Inventory.Add("sticks");
+                    if (itemString == "Sandwich")
+                    {
+                        Inventory.Remove("Bread");
+                        Inventory.Remove("Bread");
+                        Inventory.Remove("Ham");
+                        Inventory.Add("Sandwich");
+                    }
+                    else if (itemString == "Sticks")
+                    {
+                        Inventory.Remove("Wood");
+                        Inventory.Add("Sticks");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error Code: craft");
+                    }
+                    Console.WriteLine(itemString + " added to your inventory");
                 }
-                else
+                else if (canCraft(item, Inventory) == false)
                 {
-                    Console.WriteLine("Error Code: craft");
+                    Console.WriteLine("You can't craft: " + itemString);
                 }
-                Console.WriteLine(itemString + " added to your inventory");
-            }
-            else if (canCraft(item, Inventory) == false)
-            {
-                Console.WriteLine("You can't craft this");
             }
         }
         
@@ -146,9 +165,9 @@ namespace Operators
         {
             var checkList = new ArrayList();
             //cycles through all items in Inventory
-            var Inventory = InventoryList;
-            // for (int i = 0; i < Inventory.Count; i++)
+            var Inventory = new ArrayList(InventoryList);
             
+            // for (int i = 0; i < Inventory.Count; i++)
             for (int i = 0; Inventory.Count != 0; i++)
             {
                 string conItem = System.Convert.ToString(Inventory[0]);
@@ -157,8 +176,6 @@ namespace Operators
                 //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
                 if (checkList.Contains(conItem) == false)
                 {
-                    
-                    
                     var amount = 0;
                     
                     checkList.Add(conItem);
@@ -184,9 +201,7 @@ namespace Operators
                 // }
                 // Console.WriteLine("cl end");
             }
-
             
-            printList(checkList);
             return checkList;
             
         }
@@ -212,7 +227,26 @@ namespace Operators
             }
             Console.WriteLine(printedString);
         }
-
+        static void pickUp (object item, int num, ArrayList Inventory)
+        {
+            int amount = 0;
+            for (int i = 0; i < num; i++)
+            {
+                if (canPickUp(item, Inventory))
+                {
+                    Inventory.Add(item);
+                }
+                else if (canPickUp(item, Inventory) == false)
+                {
+                    amount++;
+                }
+            }
+            if (amount != 0)
+            {
+                string itemString = System.Convert.ToString(item);
+                Console.WriteLine("You can't pick up " + amount + " of the " + itemString);
+            }
+        }
 
 
 
@@ -220,16 +254,22 @@ namespace Operators
 
         static void Main(string[] args)
         {
+            
             var myInventory = new ArrayList()
             {
-                "Wood", "Wood", "Burger", "Stone", "Stone", "x", "x", "Stone", "x", "x", "axe"
+                "Wood", "Wood", "Burger", "Stone", "Stone", "x", "x", "Stone", "x", "x", "Sandwich", "Ham", "Bread", "Bread"
             };
-            checkInventory(myInventory);
+            printList(checkInventory(myInventory));
+            // craft("Sandwich", myInventory);
+            craft("Sandwich", 1 , myInventory);
+            printList(checkInventory(myInventory));
+            
             
             // for (int i = 0; i < myInventory.Count; i++)
             // {
             //     Console.WriteLine("Item " + i);
             // }
+            
             
         }
         
