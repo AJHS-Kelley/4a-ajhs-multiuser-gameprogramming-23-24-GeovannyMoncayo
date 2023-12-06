@@ -151,13 +151,13 @@ namespace Operators
             
             for (int i = 0; Inventory.Count != 0; i++)
             {
-                string checkedItem = System.Convert.ToString(Inventory[i]);
-                Console.WriteLine("index: " + i);
-                    //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
-                if (checkList.Contains(checkedItem) == false)
+                string conItem = System.Convert.ToString(Inventory[0]);
+                
+                // Console.WriteLine("index: " + i);
+                //If the checkList doesn't contain the item, for example "Stone", then it would skip it and go onto "Wood"
+                if (checkList.Contains(conItem) == false)
                 {
                     
-                    string conItem = checkedItem;
                     
                     var amount = 0;
                     
@@ -165,35 +165,52 @@ namespace Operators
                     
                     for (int j = 0; Inventory.Contains(conItem); j++)
                     {
-                        Console.WriteLine("j: " + j);
+                        // Console.WriteLine("j: " + j);
                         
                         amount++;
                         Inventory.Remove(conItem);
-                        Console.WriteLine(conItem + " Removed");
-                    
-                        
+                        // Console.WriteLine(conItem + " Removed");
                     }
                     
                     checkList.Add(amount);
-                    Console.WriteLine(amount);
+                    // Console.WriteLine(amount);
                 }
                 
                 
-                Console.WriteLine("cl beg");
-                foreach (object thingy in Inventory)
-                {
-                    Console.WriteLine(thingy);
-                }
-                Console.WriteLine("cl end");
+                // Console.WriteLine("cl beg");
+                // foreach (object thingy in Inventory)
+                // {
+                //     Console.WriteLine(thingy);
+                // }
+                // Console.WriteLine("cl end");
             }
 
             
-            // THIS IS NOT THE PROBLEM. 
-            for (int z = 0; z < checkList.Count; z++)
-            {
-                Console.WriteLine(checkList[z]);
-            }
+            printList(checkList);
             return checkList;
+            
+        }
+        
+        static void printList(ArrayList printedList)
+        {
+            string printedString = "Printed List: ";
+            for (int i = 0; i < printedList.Count; i++)
+            {
+                if (i == 0)
+                {
+                    printedString = printedString + System.Convert.ToString(printedList[i]);
+                }
+                else if (i % 2 == 1)
+                {
+                    printedString = printedString + ": " + System.Convert.ToString(printedList[i]);
+                }
+                else if (i % 2 == 0)
+                {
+                    printedString = printedString + ", " + System.Convert.ToString(printedList[i]);
+                }
+                
+            }
+            Console.WriteLine(printedString);
         }
 
 
@@ -205,7 +222,7 @@ namespace Operators
         {
             var myInventory = new ArrayList()
             {
-                "Wood", "Wood", "Stone", "Stone", "x", "x", "Stone", "x", "x"
+                "Wood", "Wood", "Burger", "Stone", "Stone", "x", "x", "Stone", "x", "x", "axe"
             };
             checkInventory(myInventory);
             
@@ -218,8 +235,3 @@ namespace Operators
         
     }
 }
-
-
-
-
-
