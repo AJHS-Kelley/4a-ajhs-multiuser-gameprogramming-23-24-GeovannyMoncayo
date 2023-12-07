@@ -5,6 +5,12 @@ using System.Collections;
 
 namespace Operators
 {
+    static class Globals
+    {
+        public static int maxAmount = 10;
+    }
+
+    
     class Program
 
     {   
@@ -82,71 +88,96 @@ namespace Operators
             
 
         }
-        static bool canPickUp(object pickItem, ArrayList Inventory)
+        static int canPickUp(object pickItem, int amount, ArrayList Inventory)
         {
             
             var checkList = new ArrayList (checkInventory(Inventory));
             string item = System.Convert.ToString(pickItem);
-            int maxAmount = 10;
-            
+            int canPickUp = 0;
+            int cantPickUp = 0;
+            bool contained = false;
             for(int i = 0; i <= checkList.Count-1; i++)
             {
                 
-                if (item == checkList[i])
+                for (int j = 0; j < amount; j++)
                 {
-                    int itemCount = System.Convert.ToInt32(checkList[i+1]);
-                    if (itemCount == maxAmount)
+                    if (item == checkList[i])
                     {
-                        return false;
-                    }
-                    else if (itemCount > maxAmount)
-                    {
-                        for(int x = 0; x < itemCount-maxAmount; x++)
+                        contained = true;
+                        int invItemCount = System.Convert.ToInt32(checkList[i+1]);
+                        if (invItemCount == Globals.maxAmount)
                         {
-                            Inventory.Remove(item);
-                            Console.WriteLine("Items removed");
+                            cantPickUp++;
                         }
-                        return false;
-                    }
-                    else if (itemCount < maxAmount)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error Code: for pickUp");
+                        else if (invItemCount > Globals.maxAmount)
+                        {
+                            for(int x = 0; x < invItemCount-Globals.maxAmount; x++)
+                            {
+                                Inventory.Remove(item);
+                                Console.WriteLine(item + " removed");
+                            }
+                            cantPickUp++;
+                        }
+                        else if (invItemCount < Globals.maxAmount)
+                        {
+                            canPickUp++;
+                            checkList[i+1] = invItemCount + 1;
+                            // Console.WriteLine("can pick up" )
+                            // return maxAmount - invItemCount;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error Code: for pickUp");
+                        }
                     }
                 }
                 
             }
-            Console.WriteLine("Error Code: pickUp");
-            return false;
+            if (contained == false)
+            {
+                return Globals.maxAmount;
+            }
+            // Console.WriteLine("You CAN'T pick up " + cantPickUp + " " + pickItem);
+            // Console.WriteLine("You CAN pick up " + canPickUp + " " + pickItem);
+            return canPickUp;
         }
         
         static void craft(object item, int amount, ArrayList Inventory)
         {
             string itemString = System.Convert.ToString(item);
+            int cantPickUp = 0;
+            int cantCraft = 0;
             for (int i = 0; i < amount; i++)
             {
                 
-            
-                if (canPickUp(item, Inventory) == false)
-                {
-                    Console.WriteLine("You can't craft " + itemString + " because you have too much");
-                }
                 if (canCraft(item, Inventory) == true)
                 {
                     if (itemString == "Sandwich")
                     {
-                        Inventory.Remove("Bread");
-                        Inventory.Remove("Bread");
-                        Inventory.Remove("Ham");
-                        Inventory.Add("Sandwich");
+                        if (canPickUp(item, 1, Inventory) >= 1)
+                        {
+                            Inventory.Remove("Bread");
+                            Inventory.Remove("Bread");
+                            Inventory.Remove("Ham");
+                            Inventory.Add("Sandwich");
+                        } 
+                        else if (canPickUp(item, 1, Inventory) < 1)
+                        {
+                            cantPickUp++;
+                        }
                     }
                     else if (itemString == "Sticks")
                     {
-                        Inventory.Remove("Wood");
-                        Inventory.Add("Sticks");
+                        if (canPickUp(itemString, 2, Inventory) >= 2)
+                        {
+                            Inventory.Remove("Wood");
+                            Inventory.Add("Sticks");
+                            Inventory.Add("Sticks");
+                        }
+                        else if (canPickUp(item, 2, Inventory) < 2)
+                        {
+                            cantPickUp = cantPickUp + 2;
+                        }
                     }
                     else
                     {
@@ -156,9 +187,18 @@ namespace Operators
                 }
                 else if (canCraft(item, Inventory) == false)
                 {
-                    Console.WriteLine("You can't craft: " + itemString);
+                    cantCraft++;
                 }
             }
+            if (cantCraft > 0)
+            {
+                Console.WriteLine("You can't craft " + cantCraft + " " + itemString + " due to insufficient resources");
+            }
+            if (cantPickUp > 0)
+            {
+                Console.WriteLine("You can't craft " + cantPickUp + " " + itemString + " due to insufficient inventory space");
+            }
+            
         }
         
         static ArrayList checkInventory (ArrayList InventoryList)
@@ -229,23 +269,27 @@ namespace Operators
         }
         static void pickUp (object item, int num, ArrayList Inventory)
         {
-            int amount = 0;
-            for (int i = 0; i < num; i++)
+            // int cantPickUpInt = num - canPickUp(item, num, Inventory);
+            int canPickUpInt = canPickUp(item, num, Inventory);
+            
+            for (int i = 0; i < canPickUpInt; i++)
             {
-                if (canPickUp(item, Inventory))
-                {
-                    Inventory.Add(item);
-                }
-                else if (canPickUp(item, Inventory) == false)
-                {
-                    amount++;
-                }
+                Inventory.Add(item);
             }
-            if (amount != 0)
-            {
-                string itemString = System.Convert.ToString(item);
-                Console.WriteLine("You can't pick up " + amount + " of the " + itemString);
-            }
+            
+            // if (canPickUp(item, num, Inventory) > 0)
+            // {
+            //     Inventory.Add(item);
+            // }
+            // else if (canPickUp(item, 1, Inventory) == 0)
+            // {
+            //     amount++;
+            // }
+            // string itemString = System.Convert.ToString(item);
+            
+            
+            // Console.WriteLine("You CAN'T pick up " + cantPickUpInt + " of the " + itemString);
+            // Console.WriteLine("You CAN pick up " + canPickUpInt + " of the " + itemString);
         }
 
 
@@ -261,7 +305,8 @@ namespace Operators
             };
             printList(checkInventory(myInventory));
             // craft("Sandwich", myInventory);
-            craft("Sandwich", 1 , myInventory);
+            pickUp("Wood", 100, myInventory);
+            craft("Sticks", 10, myInventory);
             printList(checkInventory(myInventory));
             
             
