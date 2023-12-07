@@ -7,84 +7,127 @@ namespace Operators
 {
     static class Globals
     {
-        public static int maxAmount = 10;
+        public static int maxAmount = 100;
+        
+        public static string response = "";
     }
 
     
     class Program
 
     {   
-        static bool canCraft (object item, ArrayList InventoryList)
+        static int canCraft (object item, int amount, ArrayList InventoryList)
         {
             var itemString = System.Convert.ToString(item);
             var Inventory = new ArrayList(InventoryList);
-            if (itemString == "Sandwich")
+            int craftable = 0;
+            int unCraftable = 0;
+            int setSize = 0;
+            for (int q = 0; q < amount; q++)
             {
-                int breadCount = 0;
-                int hamCount = 0;
-                foreach (object thing in Inventory)
+                if (itemString == "Sandwich")
                 {
-                    if (System.Convert.ToString(thing) == "Bread")
+                    setSize = 1;
+                    int breadCount = 0;
+                    int hamCount = 0;
+                    foreach (object thing in Inventory)
                     {
-                        breadCount = breadCount + 1;
+                        if (System.Convert.ToString(thing) == "Bread")
+                        {
+                            breadCount = breadCount + 1;
+                        }
+                    }
+                    foreach (object thing in Inventory)
+                    {
+                        if (System.Convert.ToString(thing) == "Ham")
+                        {
+                            hamCount = hamCount + 1;
+                        }
+                    }
+                    if (breadCount >= 2 && hamCount >= 1)
+                    {
+                        craftable = craftable + setSize;
+                    }
+                    else if (breadCount < 2 && hamCount < 1)
+                    {
+                        unCraftable = unCraftable + setSize;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error Code: Sandwich canCraft count");
                     }
                 }
-                foreach (object thing in Inventory)
+                else if (itemString == "Sticks")
                 {
-                    if (System.Convert.ToString(thing) == "Ham")
+                    // if (canPickUp("Sticks", Inventory) == false)
+                    // {
+                    //     return false;
+                    //     Console.WriteLine("You can't craft sticks, you have too many");
+                    // }
+                    setSize = 2;
+                    int woodCount = 0;
+                    for (int i = 0; i < Inventory.Count; i++)
                     {
-                        hamCount = hamCount + 1;
+                        if (System.Convert.ToString(Inventory[i]) == "Wood")
+                        {
+                            woodCount = woodCount + 1;
+                        }
                     }
-                }
-                if (breadCount >= 2 && hamCount >= 1)
-                {
-                    return true;
-                }
-                else if (breadCount < 2 && hamCount < 1)
-                {
-                    return false;
+                    
+                    if (woodCount >= 1)
+                    {
+                        Inventory.Remove("Sticks");
+                        Inventory.Remove("Sticks");
+                        craftable = craftable + setSize;
+                    }
+                    else if (woodCount < 1)
+                    {
+                        unCraftable = unCraftable + setSize;
+                        // return 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error Code: Sticks canCraft count");
+                        // return 0;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Error Code: Sandwich canCraft count");
-                    return false;
+                    Console.WriteLine("Error Code: canCraft // may be caused because item does not exist");
+                    // return 0;
                 }
             }
-            else if (itemString == "Sticks")
+            if (setSize > 1 && craftable > 0)
             {
-                // if (canPickUp("Sticks", Inventory) == false)
-                // {
-                //     return false;
-                //     Console.WriteLine("You can't craft sticks, you have too many");
-                // }
-                int woodCount = 0;
-                for (int i = 0; i < Inventory.Count; i++)
-                {
-                    if (System.Convert.ToString(Inventory[i]) == "Wood")
-                    {
-                        woodCount = woodCount + 1;
-                    }
-                }
-                
-                if (woodCount >= 1)
-                {
-                    return true;
-                }
-                else if (woodCount < 1)
-                {
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine("Error Code: Sticks canCraft count");
-                    return false;
-                }
+                Console.WriteLine("You can craft " + craftable/setSize + " sets of " + setSize + " of " + item + " // " + craftable + " " + item);
+            }
+            else if (setSize == 0)
+            {
+                Console.WriteLine("You can craft " + craftable + " " + item);
+            }
+            else if (craftable == 0)
+            {
+                ;
             }
             else
             {
-                Console.WriteLine("Error Code: canCraft");
-                return false;
+                Console.WriteLine("Error Code: canCraft; craftable OR setSize variable");
             }
+            
+            
+            if (unCraftable > 1)
+            {
+                Console.WriteLine("You can craft " + craftable + " sets of " + setSize + " of " + item + " OR " + craftable/setSize + " " + item);
+            }
+            else if (unCraftable == 0)
+            {
+                ;
+            }
+            else
+            {
+                Console.WriteLine("Error Code: canCraft; unCraftable variable");
+            }
+            return craftable;
             
 
         }
@@ -101,7 +144,7 @@ namespace Operators
                 
                 for (int j = 0; j < amount; j++)
                 {
-                    if (item == checkList[i])
+                    if (item == System.Convert.ToString(checkList[i]))
                     {
                         contained = true;
                         int invItemCount = System.Convert.ToInt32(checkList[i+1]);
@@ -135,7 +178,7 @@ namespace Operators
             }
             if (contained == false)
             {
-                return Globals.maxAmount;
+                return amount;
             }
             // Console.WriteLine("You CAN'T pick up " + cantPickUp + " " + pickItem);
             // Console.WriteLine("You CAN pick up " + canPickUp + " " + pickItem);
@@ -147,10 +190,11 @@ namespace Operators
             string itemString = System.Convert.ToString(item);
             int cantPickUp = 0;
             int cantCraft = 0;
+            int crafted = 0;
             for (int i = 0; i < amount; i++)
             {
                 
-                if (canCraft(item, Inventory) == true)
+                if (canCraft(item, 1, Inventory) == 1)
                 {
                     if (itemString == "Sandwich")
                     {
@@ -183,9 +227,10 @@ namespace Operators
                     {
                         Console.WriteLine("Error Code: craft");
                     }
-                    Console.WriteLine(itemString + " added to your inventory");
+                    crafted++;
+                    
                 }
-                else if (canCraft(item, Inventory) == false)
+                else if (canCraft(item, 1, Inventory) == 0)
                 {
                     cantCraft++;
                 }
@@ -197,6 +242,10 @@ namespace Operators
             if (cantPickUp > 0)
             {
                 Console.WriteLine("You can't craft " + cantPickUp + " " + itemString + " due to insufficient inventory space");
+            }
+            if (crafted > 0)
+            {
+                Console.WriteLine(crafted + " " + itemString + " added to your inventory");
             }
             
         }
@@ -269,14 +318,23 @@ namespace Operators
         }
         static void pickUp (object item, int num, ArrayList Inventory)
         {
-            // int cantPickUpInt = num - canPickUp(item, num, Inventory);
+            int cantPickUpInt = num - canPickUp(item, num, Inventory);
             int canPickUpInt = canPickUp(item, num, Inventory);
+            
+            
             
             for (int i = 0; i < canPickUpInt; i++)
             {
                 Inventory.Add(item);
             }
-            
+            if (cantPickUpInt > 0)
+            {
+                Console.WriteLine("Can't pick up " + cantPickUpInt + " " + item);
+            }
+            if (canPickUpInt > 0)
+            {
+                Console.WriteLine("You picked up " + canPickUpInt + " " + item);
+            }
             // if (canPickUp(item, num, Inventory) > 0)
             // {
             //     Inventory.Add(item);
@@ -291,7 +349,13 @@ namespace Operators
             // Console.WriteLine("You CAN'T pick up " + cantPickUpInt + " of the " + itemString);
             // Console.WriteLine("You CAN pick up " + canPickUpInt + " of the " + itemString);
         }
-
+        static void playerInput()
+        {
+            string response = "";
+            Globals.response = Console.ReadLine();
+            response = Globals.response;
+            Globals.response = response.ToUpper();
+        }
 
 
 
@@ -299,15 +363,107 @@ namespace Operators
         static void Main(string[] args)
         {
             
-            var myInventory = new ArrayList()
+            // var myInventory = new ArrayList()
+            // {
+            //     "Wood", "Wood", "Burger", "Stone", "Stone", "x", "x", "Stone", "x", "x", "Sandwich", "Ham", "Bread", "Bread"
+            // };
+            string yourPath = "";
+            var yourInventory = new ArrayList();
+            
+            while (Globals.response.Equals("YES") != true || Globals.response.Equals("YES") != true)
             {
-                "Wood", "Wood", "Burger", "Stone", "Stone", "x", "x", "Stone", "x", "x", "Sandwich", "Ham", "Bread", "Bread"
-            };
-            printList(checkInventory(myInventory));
+                Console.WriteLine("You see a tree, do you want to chop it down? YES OR NO???");
+                playerInput();
+            }
+            
+            
+            
+            
+            if (Globals.response.Equals("YES"))
+            {
+                Console.WriteLine("Tree chopped");
+                pickUp("Wood", 5, yourInventory);
+                yourPath = "treePath";
+            }
+            else if (Globals.response.Equals("NO"))
+            {
+                Console.WriteLine("Well, what now?\n");
+                Console.WriteLine("THE END");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Error Code: treePath Error");
+                return;
+            }
+            
+            
+            
+            
+            
+            if(yourPath.Equals("treePath"))
+            {
+                while (Globals.response.Equals("YES") != true || Globals.response.Equals("YES") != true)
+                {
+                    Console.WriteLine("Do you want to craft some sticks?");
+                    playerInput();
+                }
+                
+                if (Globals.response.Equals("YES"))
+                {
+                    yourPath = "stickPath";
+                }
+                else if (Globals.response.Equals("NO"))
+                {
+                    Console.WriteLine("Well, what now?\n");
+                    Console.WriteLine("THE END");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Error Code: stickPath Error");
+                    return;
+                }
+            
+                
+                
+            }
+            if(yourPath.Equals("stickPath"))
+            {
+                while (int.TryParse(Globals.response, out value) != true)
+                {
+                    Console.WriteLine("How many?");
+                    playerInput();
+                }
+                craft("Sticks", Globals.response.System.Convert.ToInt32(), yourInventory);   
+            }
+            
+            /*
+            KEY
+            
+            canCraft(item, amount, Inventory)
+            
+            canPickUp(item, amount, Inventory)
+            
+            craft(item, amount, Inventory)
+            
+            checkInventory(Inventory)
+            
+            printList(Inventory)
+            
+            pickUp(item, amount, Inventory)
+            
+            
+            */
+            
+            
+            // TESTS
+            
+            // printList(checkInventory(myInventory));
             // craft("Sandwich", myInventory);
-            pickUp("Wood", 100, myInventory);
-            craft("Sticks", 10, myInventory);
-            printList(checkInventory(myInventory));
+            // pickUp("Wood", 1000, myInventory);
+            // craft("Sticks", 10, myInventory);
+            // printList(checkInventory(myInventory));
             
             
             // for (int i = 0; i < myInventory.Count; i++)
