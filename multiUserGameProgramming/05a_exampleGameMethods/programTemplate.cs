@@ -349,12 +349,32 @@ namespace Operators
             // Console.WriteLine("You CAN'T pick up " + cantPickUpInt + " of the " + itemString);
             // Console.WriteLine("You CAN pick up " + canPickUpInt + " of the " + itemString);
         }
-        static void playerInput()
+        static void playerInput(string consoleMessage, string type)
         {
-            string response = "";
-            Globals.response = Console.ReadLine();
-            response = Globals.response;
-            Globals.response = response.ToUpper();
+            
+            if (type.Equals("yon"))
+            {
+                while (Globals.response.Equals("YES") != true || Globals.response.Equals("YES") != true)
+                {
+                    Console.WriteLine(consoleMessage);
+                    Globals.response = Console.ReadLine();
+                    response = Globals.response;
+                    Globals.response = response.ToUpper();
+                }
+            }
+            else if (type.Equals("num"))
+            {
+                while (int.TryParse(Globals.response.System.Convert.ToInt32(), out value) != true)
+                {
+                    Console.WriteLine(consoleMessage);
+                    Globals.response = Console.ReadLine();
+                }
+            }
+            else
+            {
+                return;
+            }
+            
         }
 
 
@@ -370,11 +390,7 @@ namespace Operators
             string yourPath = "";
             var yourInventory = new ArrayList();
             
-            while (Globals.response.Equals("YES") != true || Globals.response.Equals("YES") != true)
-            {
-                Console.WriteLine("You see a tree, do you want to chop it down? YES OR NO???");
-                playerInput();
-            }
+            playerInput("You see a tree, do you want to chop it down? YES OR NO???", "yon");
             
             
             
