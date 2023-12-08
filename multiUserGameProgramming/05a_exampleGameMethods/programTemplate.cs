@@ -9,7 +9,7 @@ namespace Operators
     {
         public static int maxAmount = 100;
         
-        public static string response = "";
+        public static object response = "";
     }
 
     
@@ -97,36 +97,37 @@ namespace Operators
                     // return 0;
                 }
             }
-            if (setSize > 1 && craftable > 0)
-            {
-                Console.WriteLine("You can craft " + craftable/setSize + " sets of " + setSize + " of " + item + " // " + craftable + " " + item);
-            }
-            else if (setSize == 0)
-            {
-                Console.WriteLine("You can craft " + craftable + " " + item);
-            }
-            else if (craftable == 0)
-            {
-                ;
-            }
-            else
-            {
-                Console.WriteLine("Error Code: canCraft; craftable OR setSize variable");
-            }
+            
+            // if (setSize > 1 && craftable > 0)
+            // {
+            //     Console.WriteLine("You can craft " + craftable/setSize + " sets of " + setSize + " of " + item + " // " + craftable + " " + item);
+            // }
+            // else if (setSize == 0)
+            // {
+            //     Console.WriteLine("You can craft " + craftable + " " + item);
+            // }
+            // else if (craftable == 0)
+            // {
+            //     ;
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Error Code: canCraft; craftable OR setSize variable");
+            // }
             
             
-            if (unCraftable > 1)
-            {
-                Console.WriteLine("You can craft " + craftable + " sets of " + setSize + " of " + item + " OR " + craftable/setSize + " " + item);
-            }
-            else if (unCraftable == 0)
-            {
-                ;
-            }
-            else
-            {
-                Console.WriteLine("Error Code: canCraft; unCraftable variable");
-            }
+            // if (unCraftable > 1)
+            // {
+            //     Console.WriteLine("You can craft " + craftable + " sets of " + setSize + " of " + item + " OR " + craftable/setSize + " " + item);
+            // }
+            // else if (unCraftable == 0)
+            // {
+            //     ;
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Error Code: canCraft; unCraftable variable");
+            // }
             return craftable;
             
 
@@ -191,6 +192,8 @@ namespace Operators
             int cantPickUp = 0;
             int cantCraft = 0;
             int crafted = 0;
+            
+            
             for (int i = 0; i < amount; i++)
             {
                 
@@ -212,15 +215,21 @@ namespace Operators
                     }
                     else if (itemString == "Sticks")
                     {
+                        Console.WriteLine("Works 1");
                         if (canPickUp(itemString, 2, Inventory) >= 2)
                         {
                             Inventory.Remove("Wood");
                             Inventory.Add("Sticks");
                             Inventory.Add("Sticks");
+                            Console.WriteLine("Items added");
                         }
                         else if (canPickUp(item, 2, Inventory) < 2)
                         {
                             cantPickUp = cantPickUp + 2;
+                        }
+                        else
+                        {
+                            Console.WriteLine("error");
                         }
                     }
                     else
@@ -235,6 +244,7 @@ namespace Operators
                     cantCraft++;
                 }
             }
+            Console.WriteLine("works");
             if (cantCraft > 0)
             {
                 Console.WriteLine("You can't craft " + cantCraft + " " + itemString + " due to insufficient resources");
@@ -349,26 +359,31 @@ namespace Operators
             // Console.WriteLine("You CAN'T pick up " + cantPickUpInt + " of the " + itemString);
             // Console.WriteLine("You CAN pick up " + canPickUpInt + " of the " + itemString);
         }
-        static void playerInput(string consoleMessage, string type)
+        static void playerInput(string type, string consoleMessage)
         {
+            
             
             if (type.Equals("yon"))
             {
-                while (Globals.response.Equals("YES") != true || Globals.response.Equals("YES") != true)
+                string response = "";
+                while (response.Equals("YES") != true || response.Equals("YES") != true)
                 {
                     Console.WriteLine(consoleMessage);
-                    Globals.response = Console.ReadLine();
-                    response = Globals.response;
-                    Globals.response = response.ToUpper();
+                    response = Console.ReadLine();
+                    response = response.ToUpper();
                 }
+                Globals.response = response;
             }
             else if (type.Equals("num"))
             {
-                while (int.TryParse(Globals.response.System.Convert.ToInt32(), out value) != true)
+                int value = 0;
+                string response = "";
+                while (int.TryParse(response, out value) != true)
                 {
                     Console.WriteLine(consoleMessage);
-                    Globals.response = Console.ReadLine();
+                    response = Console.ReadLine();
                 }
+                Globals.response = System.Convert.ToInt32(response);
             }
             else
             {
@@ -390,7 +405,7 @@ namespace Operators
             string yourPath = "";
             var yourInventory = new ArrayList();
             
-            playerInput("You see a tree, do you want to chop it down? YES OR NO???", "yon");
+            playerInput("yon", "You see a tree, do you want to chop it down? YES OR NO???");
             
             
             
@@ -419,11 +434,7 @@ namespace Operators
             
             if(yourPath.Equals("treePath"))
             {
-                while (Globals.response.Equals("YES") != true || Globals.response.Equals("YES") != true)
-                {
-                    Console.WriteLine("Do you want to craft some sticks?");
-                    playerInput();
-                }
+                playerInput("yon", "Do you want to craft some sticks?");
                 
                 if (Globals.response.Equals("YES"))
                 {
@@ -446,12 +457,9 @@ namespace Operators
             }
             if(yourPath.Equals("stickPath"))
             {
-                while (int.TryParse(Globals.response, out value) != true)
-                {
-                    Console.WriteLine("How many?");
-                    playerInput();
-                }
-                craft("Sticks", Globals.response.System.Convert.ToInt32(), yourInventory);   
+                playerInput("num", "How many?");
+                Console.WriteLine(Globals.response);
+                craft("Sticks", System.Convert.ToInt32(Globals.response), yourInventory);   
             }
             
             /*
