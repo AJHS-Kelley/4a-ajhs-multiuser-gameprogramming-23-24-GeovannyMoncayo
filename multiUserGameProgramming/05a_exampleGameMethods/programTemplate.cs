@@ -132,6 +132,7 @@ namespace Operators
             
 
         }
+        
         static int canPickUp(object pickItem, int amount, ArrayList Inventory)
         {
             
@@ -193,11 +194,10 @@ namespace Operators
             int cantCraft = 0;
             int crafted = 0;
             
-            
             for (int i = 0; i < amount; i++)
             {
                 
-                if (canCraft(item, 1, Inventory) == 1)
+                if (canCraft(item, 1, Inventory) >= 1)
                 {
                     if (itemString == "Sandwich")
                     {
@@ -215,13 +215,11 @@ namespace Operators
                     }
                     else if (itemString == "Sticks")
                     {
-                        Console.WriteLine("Works 1");
                         if (canPickUp(itemString, 2, Inventory) >= 2)
                         {
                             Inventory.Remove("Wood");
                             Inventory.Add("Sticks");
                             Inventory.Add("Sticks");
-                            Console.WriteLine("Items added");
                         }
                         else if (canPickUp(item, 2, Inventory) < 2)
                         {
@@ -244,7 +242,6 @@ namespace Operators
                     cantCraft++;
                 }
             }
-            Console.WriteLine("works");
             if (cantCraft > 0)
             {
                 Console.WriteLine("You can't craft " + cantCraft + " " + itemString + " due to insufficient resources");
@@ -326,6 +323,7 @@ namespace Operators
             }
             Console.WriteLine(printedString);
         }
+        
         static void pickUp (object item, int num, ArrayList Inventory)
         {
             int cantPickUpInt = num - canPickUp(item, num, Inventory);
@@ -359,6 +357,7 @@ namespace Operators
             // Console.WriteLine("You CAN'T pick up " + cantPickUpInt + " of the " + itemString);
             // Console.WriteLine("You CAN pick up " + canPickUpInt + " of the " + itemString);
         }
+        
         static void playerInput(string type, string consoleMessage)
         {
             
@@ -366,7 +365,7 @@ namespace Operators
             if (type.Equals("yon"))
             {
                 string response = "";
-                while (response.Equals("YES") != true || response.Equals("YES") != true)
+                while (response.Equals("YES") != true && response.Equals("NO") != true && response.Equals("Y") != true && response.Equals("N") != true)
                 {
                     Console.WriteLine(consoleMessage);
                     response = Console.ReadLine();
@@ -391,8 +390,30 @@ namespace Operators
             }
             
         }
-
-
+        
+        static bool yon()
+        {
+            if (Globals.response.Equals("YES") || Globals.response.Equals("Y"))
+            {
+                return true;
+            }
+            else if (Globals.response.Equals("NO") || Globals.response.Equals("N"))
+            {
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Error Code: yon()");
+                return false;
+            }
+        }
+        
+        static void theEnd()
+        {
+            Console.WriteLine("\nWell, what now?\n");
+            Console.WriteLine("THE END");
+            System.Environment.Exit(0);
+        }
 
 
         static void Main(string[] args)
@@ -410,17 +431,15 @@ namespace Operators
             
             
             
-            if (Globals.response.Equals("YES"))
+            if (yon() == true)
             {
                 Console.WriteLine("Tree chopped");
                 pickUp("Wood", 5, yourInventory);
                 yourPath = "treePath";
             }
-            else if (Globals.response.Equals("NO"))
+            else if (yon() == false)
             {
-                Console.WriteLine("Well, what now?\n");
-                Console.WriteLine("THE END");
-                return;
+                theEnd();
             }
             else
             {
@@ -436,15 +455,13 @@ namespace Operators
             {
                 playerInput("yon", "Do you want to craft some sticks?");
                 
-                if (Globals.response.Equals("YES"))
+                if (yon() == true)
                 {
                     yourPath = "stickPath";
                 }
-                else if (Globals.response.Equals("NO"))
+                else if (yon() == false)
                 {
-                    Console.WriteLine("Well, what now?\n");
-                    Console.WriteLine("THE END");
-                    return;
+                    theEnd();
                 }
                 else
                 {
@@ -458,26 +475,29 @@ namespace Operators
             if(yourPath.Equals("stickPath"))
             {
                 playerInput("num", "How many?");
-                Console.WriteLine(Globals.response);
                 craft("Sticks", System.Convert.ToInt32(Globals.response), yourInventory);   
             }
             
             /*
             KEY
             
-            canCraft(item, amount, Inventory)
+            canCraft(item, amount, Inventory) [checks if an item is craftable, returns int amount]
             
-            canPickUp(item, amount, Inventory)
+            canPickUp(item, amount, Inventory) [checks if an item can be picked up, returns int amount]
             
-            craft(item, amount, Inventory)
+            craft(item, amount, Inventory) [crafts item based on amount, doesn't exceed max amount, voids]
             
-            checkInventory(Inventory)
+            checkInventory(Inventory) [returns converted Inventory Array List as one with each item with corresponding numbers (e.g.; Box, 4, Wood, 3...), returns Array List]
             
-            printList(Inventory)
+            printList(Inventory) [print a list in one line, voids]
             
-            pickUp(item, amount, Inventory)
+            pickUp(item, amount, Inventory) [picks up an item with amount, doesn't exceed max inventory, voids]
             
+            playerInput(type, consoleMessage) [collects player response based on type (yes or no / integer), voids]
             
+            yon() [checks if response in caps version is "YES", "Y", "NO", or "YES" returns bool accordingly]
+            
+            theEnd() [ends game, voids]
             */
             
             
