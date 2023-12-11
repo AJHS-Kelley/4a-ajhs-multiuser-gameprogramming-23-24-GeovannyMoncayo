@@ -384,6 +384,17 @@ namespace Operators
                 }
                 Globals.response = System.Convert.ToInt32(response);
             }
+            else if (type.Equals("ok"))
+            {
+                string response = "";
+                while (response.Equals("ok") != true && response.Equals("NO") != true && response.Equals("K") != true && response.Equals("N") != true)
+                {
+                    Console.WriteLine(consoleMessage);
+                    response = Console.ReadLine();
+                    response = response.ToUpper();
+                }
+                Globals.response = response;
+            }
             else
             {
                 return;
@@ -391,20 +402,47 @@ namespace Operators
             
         }
         
-        static bool yon()
+        static bool yon(string type)
         {
-            if (Globals.response.Equals("YES") || Globals.response.Equals("Y"))
+            if (type == "yon")
             {
-                return true;
+                if (Globals.response.Equals("YES") || Globals.response.Equals("Y"))
+                {
+                    return true;
+                }
+                else if (Globals.response.Equals("NO") || Globals.response.Equals("N"))
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Error Code: yon('yon')");
+                    theEnd();
+                    return false;
+                }
             }
-            else if (Globals.response.Equals("NO") || Globals.response.Equals("N"))
+            else if (type == "ok")
             {
-                return false;
+                if (Globals.response.Equals("OK") || Globals.response.Equals("K"))
+                {
+                    return true;
+                }
+                else if (Globals.response.Equals("NO") || Globals.response.Equals("N"))
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Error Code: yon('ok')");
+                    theEnd();
+                    return false;
+                }
             }
             else
             {
                 Console.WriteLine("Error Code: yon()");
                 return false;
+                theEnd();
             }
         }
         
@@ -426,57 +464,83 @@ namespace Operators
             string yourPath = "";
             var yourInventory = new ArrayList();
             
-            playerInput("yon", "You see a tree, do you want to chop it down? YES OR NO???");
+            // playerInput("yon", "You see a tree, do you want to chop it down? YES OR NO???");
             
             
             
             
-            if (yon() == true)
+            // if (yon() == true)
+            // {
+            //     Console.WriteLine("Tree chopped");
+            //     pickUp("Wood", 5, yourInventory);
+            //     yourPath = "treePath";
+            // }
+            // else if (yon() == false)
+            // {
+            //     theEnd();
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Error Code: treePath Error");
+            //     return;
+            // }
+            
+            
+            
+            
+            
+            // if(yourPath.Equals("treePath"))
+            // {
+            //     playerInput("yon", "Do you want to craft some sticks?");
+                
+            //     if (yon() == true)
+            //     {
+            //         yourPath = "stickPath";
+            //     }
+            //     else if (yon() == false)
+            //     {
+            //         theEnd();
+            //     }
+            //     else
+            //     {
+            //         Console.WriteLine("Error Code: stickPath Error");
+            //         return;
+            //     }
+            
+                
+                
+            // }
+            // if(yourPath.Equals("stickPath"))
+            // {
+            //     playerInput("num", "How many?");
+            //     craft("Sticks", System.Convert.ToInt32(Globals.response), yourInventory);   
+            // }
+            
+            playerInput("yon", "Do you want to make a Sandwich?");
+            if (yon("yon") == true)
             {
-                Console.WriteLine("Tree chopped");
-                pickUp("Wood", 5, yourInventory);
-                yourPath = "treePath";
+                pickUp("Bread", 2, yourInventory);
+                pickUp("Ham", 1, yourInventory); 
             }
-            else if (yon() == false)
+            else if (yon("yon") == false)
             {
+                Console.WriteLine("No Sandwich for you");
                 theEnd();
             }
-            else
+            
+            
+            playerInput("ok", "Now, craft it");
+            if (yon("ok") == true)
             {
-                Console.WriteLine("Error Code: treePath Error");
-                return;
+                craft("Sandwich", 1, yourInventory);
             }
-            
-            
-            
-            
-            
-            if(yourPath.Equals("treePath"))
+            else if (yon("ok") == false)
             {
-                playerInput("yon", "Do you want to craft some sticks?");
-                
-                if (yon() == true)
-                {
-                    yourPath = "stickPath";
-                }
-                else if (yon() == false)
-                {
-                    theEnd();
-                }
-                else
-                {
-                    Console.WriteLine("Error Code: stickPath Error");
-                    return;
-                }
+                Console.WriteLine("No Sandwich for you");
+                theEnd();
+            }
+            theEnd();
             
-                
-                
-            }
-            if(yourPath.Equals("stickPath"))
-            {
-                playerInput("num", "How many?");
-                craft("Sticks", System.Convert.ToInt32(Globals.response), yourInventory);   
-            }
             
             /*
             KEY
